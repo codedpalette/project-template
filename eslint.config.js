@@ -26,11 +26,11 @@ export default tsEslint.config(
       "simple-import-sort": simpleImportSort,
     },
     settings: {
-      "import/resolver": {
-        typescript: true,
-      },
+      // https://github.com/import-js/eslint-plugin-import/tree/main#typescript
+      "import/resolver": { typescript: true },
     },
     languageOptions: {
+      parser: "@typescript-eslint/parser",
       parserOptions: {
         project: true,
         tsconfigRootDir: import.meta.dirname,
@@ -39,6 +39,7 @@ export default tsEslint.config(
     rules: {
       "@typescript-eslint/member-ordering": "warn",
 
+      // https://github.com/sweepline/eslint-plugin-unused-imports#usage
       "@typescript-eslint/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "warn",
       "unused-imports/no-unused-vars": [
@@ -51,11 +52,16 @@ export default tsEslint.config(
         },
       ],
 
+      // https://github.com/lydell/eslint-plugin-simple-import-sort/#example-configuration
       "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
       "import/first": "warn",
       "import/newline-after-import": "warn",
       "import/no-duplicates": "warn",
     },
+  },
+  {
+    files: ["**/*.js"],
+    ...tsEslint.configs.disableTypeChecked,
   },
 )
