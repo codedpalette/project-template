@@ -1,8 +1,12 @@
+import { fixupConfigRules } from "@eslint/compat"
+import { FlatCompat } from "@eslint/eslintrc"
 import eslint from "@eslint/js"
 import tsEslint from "typescript-eslint"
 import prettierConfig from "eslint-config-prettier"
 import unusedImports from "eslint-plugin-unused-imports"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+
+const compat = new FlatCompat({ baseDirectory: import.meta.dirname })
 
 export default tsEslint.config(
   {
@@ -11,11 +15,18 @@ export default tsEslint.config(
   eslint.configs.recommended,
   ...tsEslint.configs.recommendedTypeChecked,
   ...tsEslint.configs.stylisticTypeChecked,
+  ...fixupConfigRules(compat.extends("plugin:import/recommended")),
+  ...fixupConfigRules(compat.extends("plugin:import/typescript")),
   prettierConfig,
   {
     plugins: {
       "unused-imports": unusedImports,
       "simple-import-sort": simpleImportSort,
+    },
+    settings: {
+      "import/resolver": {
+        typescript: true,
+      },
     },
     languageOptions: {
       parserOptions: {
@@ -24,6 +35,8 @@ export default tsEslint.config(
       },
     },
     rules: {
+      "@typescript-eslint/member-ordering": "warn",
+
       "@typescript-eslint/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "warn",
       "unused-imports/no-unused-vars": [
@@ -38,6 +51,9 @@ export default tsEslint.config(
 
       "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
+      "import/first": "warn",
+      "import/newline-after-import": "warn",
+      "import/no-duplicates": "warn",
     },
   },
 )
