@@ -5,6 +5,7 @@ import tsEslint from "typescript-eslint"
 import prettierConfig from "eslint-config-prettier"
 import unusedImports from "eslint-plugin-unused-imports"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+import compatPlugin from "eslint-plugin-compat"
 
 const compat = new FlatCompat({ baseDirectory: import.meta.dirname })
 
@@ -17,6 +18,7 @@ export default tsEslint.config(
   ...tsEslint.configs.stylisticTypeChecked,
   ...fixupConfigRules(compat.extends("plugin:import/recommended")),
   ...fixupConfigRules(compat.extends("plugin:import/typescript")),
+  ...fixupConfigRules(compatPlugin.configs["flat/recommended"]),
   prettierConfig,
   {
     plugins: {
