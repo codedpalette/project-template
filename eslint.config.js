@@ -1,21 +1,21 @@
 import { fixupConfigRules } from "@eslint/compat"
 import { FlatCompat } from "@eslint/eslintrc"
 import eslint from "@eslint/js"
-import tsEslint from "typescript-eslint"
 import prettierConfig from "eslint-config-prettier"
-import unusedImports from "eslint-plugin-unused-imports"
-import simpleImportSort from "eslint-plugin-simple-import-sort"
 import compatPlugin from "eslint-plugin-compat"
+import simpleImportSort from "eslint-plugin-simple-import-sort"
+import unusedImports from "eslint-plugin-unused-imports"
+import { config as configHelper, configs as tsEslintConfigs } from "typescript-eslint"
 
 const compat = new FlatCompat({ baseDirectory: import.meta.dirname })
 
-export default tsEslint.config(
+export default configHelper(
   {
-    ignores: ["dist/**/*", ".yarn/**/*", "eslint.config.js", ".pnp.*"],
+    ignores: ["dist/**/*", ".yarn/**/*", ".pnp.*"],
   },
   eslint.configs.recommended,
-  ...tsEslint.configs.recommendedTypeChecked,
-  ...tsEslint.configs.stylisticTypeChecked,
+  ...tsEslintConfigs.recommendedTypeChecked,
+  ...tsEslintConfigs.stylisticTypeChecked,
   ...fixupConfigRules(compat.extends("plugin:import/recommended")),
   ...fixupConfigRules(compat.extends("plugin:import/typescript")),
   ...fixupConfigRules(compatPlugin.configs["flat/recommended"]),
@@ -28,9 +28,10 @@ export default tsEslint.config(
     settings: {
       // https://github.com/import-js/eslint-plugin-import/tree/main#typescript
       "import/resolver": { typescript: true },
+      // https://github.com/import-js/eslint-import-resolver-typescript#configuration
+      "import/parsers": { "@typescript-eslint/parser": [".js", ".ts", ".tsx"] },
     },
     languageOptions: {
-      parser: "@typescript-eslint/parser",
       parserOptions: {
         project: true,
         tsconfigRootDir: import.meta.dirname,
@@ -40,6 +41,7 @@ export default tsEslint.config(
       "@typescript-eslint/member-ordering": "warn",
 
       // https://github.com/sweepline/eslint-plugin-unused-imports#usage
+      "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "warn",
       "unused-imports/no-unused-vars": [
@@ -62,6 +64,6 @@ export default tsEslint.config(
   },
   {
     files: ["**/*.js"],
-    ...tsEslint.configs.disableTypeChecked,
+    extends: [tsEslintConfigs.disableTypeChecked],
   },
 )
