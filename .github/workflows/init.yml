@@ -30,9 +30,8 @@ jobs:
         run: |
           git config --local user.name 'github-actions[bot]'
           git config --local user.email 'github-actions[bot]@users.noreply.github.com'
-      - name: Reset git
+      - name: Git commit and push
         run: |
-          git update-ref -d HEAD 
           git add -A 
-          git commit -m "Init" 
-          git push --force
+          git commit -m "Update template variables" 
+          git push
