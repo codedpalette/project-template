@@ -22,7 +22,7 @@ jobs:
         run: bash .github/workflows/init.sh
         env:
           TEMPLATE: project-template
-          SUBSTITUTION: ${GITHUB_REPOSITORY#*/}
+          SUBSTITUTION: ${{ github.event.repository.name }}
       - name: Set github actions[bot] as the commiter
         run: |
           git config --local user.name 'github-actions[bot]'
