@@ -25,7 +25,11 @@ jobs:
           rm .github/workflows/init.yml
         env:
           TEMPLATE: project-template
-          SUBSTITUTION: ${{ github.event.repository.name }}      
+          SUBSTITUTION: ${{ github.event.repository.name }}
+      - name: Set git identity
+        run: |
+          git config --local user.name "${GITHUB_ACTOR}"
+          git config --local user.email '${GITHUB_ACTOR}@users.noreply.github.com'
       - name: Reset git
         run: |
           git update-ref -d HEAD 
