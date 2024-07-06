@@ -1,4 +1,4 @@
-name: Init Project
+name: Init project
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -18,15 +18,17 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
-      - name: Run the templating
-        run: bash .github/workflows/init.sh
+      - name: Replace template variables
+        run: |
+          echo "Replacing $TEMPLATE with $SUBSTITUTION"
+          find . -type f -not -path './\.*' -exec sed -i "s/$TEMPLATE/$SUBSTITUTION/g" {} +
+          rm .github/workflows/init.yml
         env:
           TEMPLATE: project-template
-          SUBSTITUTION: ${{ github.event.repository.name }}
-      - name: Set github actions[bot] as the commiter
-        run: |
-          git config --local user.name 'github-actions[bot]'
-          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+          SUBSTITUTION: ${{ github.event.repository.name }}      
       - name: Reset git
         run: |
-          git update-ref -d HEAD && git add -A && git commit -m "Init" && git push --force
+          git update-ref -d HEAD 
+          git add -A 
+          git commit -m "Init" 
+          git push --force
