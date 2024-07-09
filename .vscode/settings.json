@@ -6,7 +6,8 @@
     ".git/objects",
     ".vscode",
     ".vscode-insiders",
-    "yarn.lock"
+    "yarn.lock",
+    ".github"
   ],
   "files.exclude": {
     "**/.git": true,

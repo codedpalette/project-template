@@ -1,0 +1,21 @@
+name: Template sync
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight
+  workflow_dispatch:
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/sync
+        with:
+          steps: "prechecks,pull"
+      - uses: ./.github/actions/templating
+      - uses: ./.github/actions/sync
+        with:
+          steps: "commit,push,pr"
