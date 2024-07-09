@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   repo-sync:
+    if: github.event.repository.name != 'project-template'
     runs-on: ubuntu-latest
     permissions:
       contents: write
