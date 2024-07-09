@@ -1,6 +1,6 @@
 # project-template
 
-- [ ] [Template Transformer & Cleanup](https://github.com/marketplace/actions/template-cleanup-action)
-- [ ] [actions-template-sync](https://github.com/marketplace/actions/actions-template-sync)
+Go to Settings > Actions > General > Allow GitHub Actions to create and approve pull requests
+
 - [ ] Template description in readme
 - [ ] dependabot
