@@ -31,5 +31,5 @@ jobs:
         run: |
           git update-ref -d HEAD
           git add -A 
-          git commit -m "Update template variables" 
-          git push
+          git commit -m "Init" 
+          git push --force
