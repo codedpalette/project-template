@@ -12,7 +12,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-
     steps:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
@@ -22,3 +21,9 @@ jobs:
         with:
           source_repo_path: ${{ github.repository_owner }}/project-template
           upstream_branch: master
+          git_user_name: github-actions[bot]
+          is_allow_hooks: true
+          hooks: >
+            precommit:
+              commands:
+                - .github/workflows/templating.sh
