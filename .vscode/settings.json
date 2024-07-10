@@ -19,7 +19,7 @@
     "node_modules": true,
     ".github": true,
     ".husky": true,
-    //".yarn": true,
+    ".yarn": true,
     ".pnp.*": true
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",

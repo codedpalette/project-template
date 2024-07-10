@@ -9,7 +9,8 @@ This is my opinionated TypeScript project template. It uses [Vite](https://vitej
 - `yarn preview` - Locally preview the production build
 - `yarn typecheck` - Check type correctness
 - `yarn format` - Format with [Prettier](https://prettier.io/)
-- `yarn lint` - Lint with [ESLint](https://eslint.org/) and [typescript-eslint](https://typescript-eslint.io/)
+- `yarn lint` - Lint JS with [ESLint](https://eslint.org/) and TS with [typescript-eslint](https://typescript-eslint.io/)
+- `yarn lint:style` - Lint CSS with [Stylelint](https://stylelint.io/)
 
 Last three scripts run automatically on every commit using [Husky](https://typicode.github.io/husky/)
 

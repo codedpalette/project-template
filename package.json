@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "browserslist": [
-    "defaults, not op_mini all"
+    ">= 0.01% and last 2 years, not dead"
   ],
   "lint-staged": {
     "*.ts?(x)": [
