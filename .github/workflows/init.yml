@@ -8,7 +8,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/templating
+      - name: Replace template variables
+        uses: ./.github/actions/templating
       - name: Set github actions[bot] as the commiter
         run: |
           git config --local user.name 'github-actions[bot]'
